@@ -1,73 +1,59 @@
-<div align="center">
-
 # FastLog
 
-### **CPU-Optimized Log Processing Engine in C++**
+## Project Goal
+**FastLog** is a high-performance C++ log processing engine designed to handle massive datasets efficiently. The primary objective is to build a baseline implementation and then iteratively optimize it to achieve a **4x speedup** through advanced techniques in memory management, concurrency, and I/O.
 
-</div>
+This project serves as a real-world playground for systems programming concepts:
+- Zero-copy parsing
+- SIMD optimization
+- Lock-free data structures
+- Custom memory allocators
 
----
+## Log Format
+The engine processes newline-delimited log files with the following structure:
+```text
+<TIMESTAMP> <LEVEL> <SERVICE_NAME> <MESSAGE>
+```
 
-## Overview
+**Example:**
+```text
+1638210000 INFO  auth_service  User login successful id=42
+1638210005 ERROR db_shard_1    Connection timeout retrying...
+1638210012 WARN  cache_layer   High memory usage detected
+```
 
-**FastLog** is a high-performance C++ application designed to efficiently process massive log files (ranging from 100MB to multiple GBs). It focuses on extreme optimization, leveraging low-level CPU and memory techniques to parse, filter, and analyze data at lightning speeds.
+## How to Run
 
-### Key Capabilities
-- **High-Speed I/O**: Reads large files efficiently.
-- **Parsing**: Extracts structured data from raw log lines.
-- **Filtering**: rapid filtering by log level, user ID, or timestamps.
-- **Aggregation**: Computes statistics (counts, averages, top-K) in real-time.
-- **Optimization**: Implements advanced CPU & memory optimizations.
+### Prerequisites
+- C++17 compliant compiler (GCC/Clang/MSVC)
+- CMake 3.15+
 
----
+### Build
+```bash
+cmake -B build
+cmake --build build
+```
 
-## Objective
+### Run
+```bash
+./build/fastlog datasets/sample.log
+```
 
-The primary goal is to **progressively optimize** a baseline C++ program. This project serves as a practical exploration of:
-- **Memory Management**: Reducing allocations and improving access patterns.
-- **CPU Architecture**: Exploiting cache locality and instruction pipelining.
-- **Concurrency**: Implementing multithreading for parallel processing.
+## Milestones
 
----
+### Month 1: Foundation
+- [ ] **Baseline I/O**: Efficient file reading (chunks/mmap).
+- [ ] **Basic Parser**: Convert raw lines to structured `LogEntry` objects.
+- [ ] **Stats Engine**: Aggregate counts by level and service.
+- [ ] **Benchmarking Harness**: Establish the "Ground Truth" performance.
 
-## Learning Objectives
+### Month 2: Optimization
+- [ ] **Profiling**: Identify hotspots (CPU/Memory).
+- [ ] **Multithreading**: Implement thread pool for parallel processing.
+- [ ] **Memory Optimization**: Reduce allocations (std::string overhead).
+- [ ] **Goal**: Achieve 4x throughput vs Month 1 baseline.
 
-- **Basic File I/O**: Efficient reading of large datasets.
-- **Benchmarking**: Measuring throughput and latency accurately.
-- **Memory Optimization**: Custom allocators, zero-copy parsing.
-- **CPU Optimization**: Branch prediction, SIMD, cache friendliness.
-- **Multithreading**: Thread pools, lock-free structures.
-
----
-
-## Goals
-
-- [ ] **Build a Complete Engine**: Read, parse, filter, and analyze hundreds of MBs of logs.
-- [ ] **Establish Baselines**: Create a simple implementation to benchmark against.
-- [ ] **Optimize Data Structures**: Use memory-efficient layouts to minimize overhead.
-- [ ] **Cache Optimization**: Improve data layout to reduce cache misses.
-- [ ] **Achieve 4x Speedup**: Document and reach a 400% performance improvement over the baseline.
-
----
-
-## Timeline
-
-### **Month 1: Foundation**
-- [ ] **Basic I/O**: Implementing efficient file reading.
-- [ ] **Parsing & Filtering**: Core logic for handling log data.
-- [ ] **Benchmarking**: Setting up tools to measure performance (throughput/time).
-- [ ] **Aggregation**: Computing basic stats (count per level, average latency).
-- [ ] **Core Concepts**: Deep dive into performance measurement.
-
-### **Month 2: Deep Optimization**
-- [ ] **CPU & Memory**: Profiling and refactoring for hardware efficiency.
-- [ ] **Custom Parsers**: Writing specialized parsers faster than standard libraries.
-- [ ] **Multithreading Theory**: Understanding concurrency models.
-- [ ] **Parallel Implementation**: Applying threads to hit benchmarks.
-
-### **Month 3: Finalization**
-- [ ] **Polish**: Clean up code and documentation.
-- [ ] **Backlog**: Address any remaining tasks or bugs.
-- [ ] **Final Review**: Prepare the repository for showcase.
-
----
+### Month 3: Polish
+- [ ] **API Cleanup**: internal interfaces are stable and clean.
+- [ ] **Final Benchmarks**: Comprehensive report generation.
+- [ ] **Demo**: One-click script to show processing of a 1GB+ file.
