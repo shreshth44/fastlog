@@ -21,6 +21,22 @@ The engine processes ISO8601-timestamped log files with the following structure:
 2026-10-25T03:13:06Z ERROR user8469 66ms "Permission denied"
 ```
 
+## Directory Structure
+
+```text
+.
+├── .github/             # GitHub configuration (e.g., CI workflows)
+├── benchmarks/          # Performance benchmarking suites
+├── datasets/            # Sample log datasets for testing and benchmarks
+├── docs/                # Project documentation and track details
+├── include/             # C++ header files
+│   └── fastlog/         # Core library headers
+├── log generator/       # Utilities to generate test log data
+├── src/                 # Source code
+│   └── main.cpp         # Main entry point
+└── tests/               # Unit and integration tests
+```
+
 ## How to Run
 
 ### Prerequisites
