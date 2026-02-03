@@ -1,0 +1,16 @@
+# Build
+build/
+bin/
+lib/
+*.dSYM/
+.cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Data
+datasets/*
+!datasets/.keep
+*.log
